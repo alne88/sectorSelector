@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ee.demo.sectorSelector.persistence.UserDao">
+
+    <select id="findByUsername" resultType="ee.demo.sectorSelector.models.UserDto">
+        SELECT id,
+               username,
+               password,
+               role,
+               terms_agreed AS "termsAgreed"
+          FROM users
+         WHERE username = #{username};
+    </select>
+
+    <select id="findById" resultType="ee.demo.sectorSelector.models.UserDto">
+        SELECT id,
+               username,
+               password,
+               role,
+               terms_agreed AS "termsAgreed"
+          FROM users
+         WHERE id = #{id};
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users (
+            username,
+            password,
+            role,
+            terms_agreed
+        )
+        VALUES (
+            #{username},
+            #{password},
+            #{role},
+            #{termsAgreed}
+        );
+    </insert>
+
+    <insert id="update">
+        UPDATE users
+           SET username = #{username},
+               terms_agreed = #{termsAgreed}
+         WHERE id = #{id};
+    </insert>
+
+</mapper>

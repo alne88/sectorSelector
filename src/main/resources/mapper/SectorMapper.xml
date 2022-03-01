@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ee.demo.sectorSelector.persistence.SectorDao">
+
+    <select id="findAll" resultType="ee.demo.sectorSelector.models.SectorDto">
+        SELECT code,
+               name,
+               numeric_value AS numericValue,
+               sub_type_level AS subTypeLevel
+          FROM sectors;
+    </select>
+
+    <select id="findByCode" resultType="ee.demo.sectorSelector.models.SectorDto">
+        SELECT code,
+               name,
+               numeric_value AS numericValue,
+               sub_type_level AS subTypeLevel
+        FROM sectors
+        WHERE code = #{code};
+    </select>
+
+    <select id="findByUserId" resultType="java.lang.String">
+        SELECT sector_code
+          FROM user_sectors
+         WHERE user_id = #{userId};
+    </select>
+
+    <insert id="insertUserSectors">
+        INSERT INTO user_sectors (
+            user_id,
+            sector_code
+        )
+        VALUES (
+            #{userId},
+            #{sectorCode}
+        );
+    </insert>
+
+    <insert id="deleteByUserId">
+        DELETE FROM user_sectors
+        WHERE user_id = #{userId};
+    </insert>
+</mapper>

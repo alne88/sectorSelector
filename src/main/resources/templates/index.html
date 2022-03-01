@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>User sectors</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div class="container-fluid col-sm-10">
+            <form class="form" action="#" method="POST" th:action="@{/logout}">
+                <div class="form-group">
+                    <button class="btn btn-secondary" type="submit">Logout</button>
+                </div>
+            </form>
+            <div>
+                <h5>Please enter your name and pick the Sectors you are currently involved in.</h5>
+            </div>
+
+            <form action="#" method="POST" th:action="@{/user/update}" th:object="${userDetails}">
+                <div th:if="${alertClass}" th:class="${'col-sm-10 alert ' + alertClass}" th:text="${message}"/>
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <div class="col-sm-10 alert alert-danger" th:each="err : ${#fields.globalErrors()}" th:text="${err}"/>
+                </div>
+
+                <input type="text" id="userId" th:field="*{userId}" th:value="${userId}" hidden>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="username">Name</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" id="username" th:field="*{username}" th:value="${username}" required>
+                        <span class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="sectors">Sectors</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="sectors" multiple="multiple" size="10" th:field="*{sectors}" required>
+                            <option th:each="sector, itemStat : ${sectorOptions}"
+                                    th:value="${sector.code}"
+                                    th:text="${sector.name}"
+                                    th:selected="${sector.selected}"
+                                    th:disabled="${sector.subTypeLevel == 0}"></option>
+                        </select>
+                        <span class="alert alert-danger" th:if="${#fields.hasErrors('sectors')}" th:errors="*{sectors}"/>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="termsAgreed" th:field="*{termsAgreed}" th:checked="${termsAgreed}">
+                    <label class="form-check-label" for="termsAgreed">Agree to terms:</label>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('termsAgreed')}" th:errors="*{termsAgreed}"/>
+                </div>
+
+                <div class="form-group" style="padding-top:20px">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>

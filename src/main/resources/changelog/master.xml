@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+                   xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.7.xsd'
+                   logicalFilePath='changelog/master.xml'>
+
+
+    <changeSet id='20220215-create-tables' author='system'>
+        <sqlFile path='schema.sql' relativeToChangelogFile='true'/>
+    </changeSet>
+
+    <changeSet id='20220215-create_new_users' author='alo.nelis'>
+        <sql>
+            INSERT INTO users
+                (username, password, role)
+            VALUES
+                ('admin', '$2a$10$ISC.BNIRBngEiyB/njKGNu5pLm4uUTqFCQuIFC4dJjtFQrtFgMTv2', 'ROLE_ADMIN');
+        </sql>
+    </changeSet>
+
+    <changeSet id='20220215-insert-sector-values' author='alo.nelis'>
+        <sql>
+            INSERT INTO sectors
+                (code, name, numeric_value, sub_type_level)
+            VALUES
+                ('MANUFACTURING', 'Manufacturing', 1, 0),
+                ('CONSTRUCTION_MATERIALS', 'Construction materials', 19, 1),
+                ('ELECTRONICS_AND_OPTICS', 'Electronics and Optics', 18, 1),
+                ('FOOD_AND_BEVERAGE', 'Food and Beverage', 6, 0),
+                ('BAKERY_AND_CONFECTIONERY_PRODUCTS', 'Bakery &amp; confectionery products', 342, 2),
+                ('BEVERAGES', 'Beverages', 43, 1),
+                ('FISH_AND_FISH_PRODUCTS', 'Fish &amp; fish products', 42, 1),
+                ('MEAT_AND_MEAT_PRODUCTS', 'Meat &amp; meat products', 40, 1),
+                ('MILK_AND_DAIRY_PRODUCTS', 'Milk &amp; dairy products', 39, 1),
+                ('OTHER_437', 'Other', 437, 2),
+                ('SWEETS_AND_SNACK_FOOD', 'Sweets &amp; snack food', 378, 2),
+                ('FURNITURE', 'Furniture', 13, 1),
+                ('BATHROOM_SAUNA', 'Bathroom/sauna', 389, 2),
+                ('BEDROOM', 'Bedroom', 385, 2),
+                ('CHILDRENS_ROOM', 'Children’s room', 390, 2),
+                ('KITCHEN', 'Kitchen', 98, 1),
+                ('LIVING_ROOM', 'Living room', 101, 2),
+                ('OFFICE', 'Office', 392, 2),
+                ('OTHER_FURNITURE', 'Other (Furniture)', 394, 2),
+                ('OUTDOOR', 'Outdoor', 341, 2),
+                ('PROJECT_FURNITURE', 'Project furniture', 99, 1),
+                ('MACHINERY', 'Machinery', 12, 1),
+                ('MACHINERY_COMPONENTS', 'Machinery components', 94, 1),
+                ('MACHINERY_EQUIPMENT_TOOLS', 'Machinery equipment/tools', 91, 1),
+                ('MANUFACTURE_OF_MACHINERY', 'Manufacture of machinery', 224, 2),
+                ('MARITIME', 'Maritime', 97, 1),
+                ('ALUMINIUM_AND_STEEL_WORKBOATS', 'Aluminium and steel workboats', 271, 2),
+                ('BOAT_YACHT_BUILDING', 'Boat/Yacht building', 269, 2),
+                ('SHIP_REPAIR_AND_CONVERSION', 'Ship repair and conversion', 230, 2),
+                ('METAL_STRUCTURES', 'Metal structures', 93, 1),
+                ('OTHER_508', 'Other', 508, 2),
+                ('REPAIR_AND_MAINTENANCE_SERVICE', 'Repair and maintenance service', 227, 2),
+                ('METALWORKING', 'Metalworking', 11, 1),
+                ('CONSTRUCTION_OF_METAL_STRUCTURES', 'Construction of metal structures', 67, 1),
+                ('HOUSES_AND_BUILDINGS', 'Houses and buildings', 263, 2),
+                ('METAL_PRODUCTS', 'Metal products', 267, 2),
+                ('METAL_WORKS', 'Metal works', 542, 2),
+                ('CNC_MACHINING', 'CNC-machining', 75, 1),
+                ('FORGINGS_FASTENERS', 'Forgings, Fasteners', 62, 1),
+                ('GAS_PLASMA_LASER_CUTTING', 'Gas, Plasma, Laser cutting', 69, 1),
+                ('MIG_TIG_ALUMINUM_WELDING', 'MIG, TIG, Aluminum welding', 66, 1),
+                ('PLASTIC_AND_RUBBER', 'Plastic and Rubber', 9, 0),
+                ('PACKAGING', 'Packaging', 54, 1),
+                ('PLASTIC_GOODS', 'Plastic goods', 556, 2),
+                ('PLASTIC_PROCESSING_TECHNOLOGY', 'Plastic processing technology', 559, 2),
+                ('BLOWING', 'Blowing', 55, 1),
+                ('MOULDING', 'Moulding', 57, 1),
+                ('PLASTICS_WELDING_AND_PROCESSING', 'Plastics welding and processing', 53, 1),
+                ('PLASTIC_PROFILES', 'Plastic profiles', 560, 2),
+                ('PRINTING', 'Printing', 5, 0),
+                ('ADVERTISING', 'Advertising', 148, 2),
+                ('BOOK_PERIODICALS_PRINTING', 'Book/Periodicals printing', 150, 2),
+                ('LABELLING_AND_PACKAGING_PRINTING', 'Labelling and packaging printing', 145, 2),
+                ('TEXTILE_AND_CLOTHING', 'Textile and Clothing', 7, 0),
+                ('CLOTHING', 'Clothing', 44, 1),
+                ('TEXTILE', 'Textile', 45, 1),
+                ('WOOD', 'Wood', 8, 0),
+                ('OTHER_WOOD', 'Other (Wood)', 337, 2),
+                ('WOODEN_BUILDING_MATERIALS', 'Wooden building materials', 51, 1),
+                ('WOODEN_HOUSES', 'Wooden houses', 47, 1),
+                ('OTHER_3', 'Other', 3, 0),
+                ('CREATIVE_INDUSTRIES', 'Creative industries', 37, 1),
+                ('ENERGY_TECHNOLOGY', 'Energy technology', 29, 1),
+                ('ENVIRONMENT', 'Environment', 33, 1),
+                ('SERVICE', 'Service', 2, 0),
+                ('BUSINESS_SERVICES', 'Business services', 25, 1),
+                ('ENGINEERING', 'Engineering', 35, 1),
+                ('INFORMATION_TECHNOLOGY_AND_TELECOMMUNICATIONS', 'Information Technology and Telecommunications', 28, 1),
+                ('DATA_PROCESSING_WEB_PORTALS_E_MARKETING', 'Data processing, Web portals, E-marketing', 581, 2),
+                ('PROGRAMMING_CONSULTANCY', 'Programming, Consultancy', 576, 2),
+                ('SOFTWARE_HARDWARE', 'Software, Hardware', 121, 2),
+                ('TELECOMMUNICATIONS', 'Telecommunications', 122, 2),
+                ('TOURISM', 'Tourism', 22, 1),
+                ('TRANSLATION_SERVICES', 'Translation services', 141, 2),
+                ('TRANSPORT_AND_LOGISTICS', 'Transport and Logistics', 21, 1),
+                ('AIR', 'Air', 111, 2),
+                ('RAIL', 'Rail', 114, 2),
+                ('ROAD', 'Road', 112, 2),
+                ('WATER', 'Water', 113, 2);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
